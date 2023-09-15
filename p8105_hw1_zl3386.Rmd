@@ -5,26 +5,18 @@ date: "2023-09-14"
 output: github_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r, echo = FALSE, message = FALSE}
+library(moderndive)
+data("early_january_weather")
+#help(early_january_weather)
 ```
 
-## R Markdown
+# Problem 1
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## The `early_january_weather` dataset
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+The `early_january_weather` dataset contains hourly meterological data for LGA, JFK and EWR for the month of January 2013. It is a subset of the `weather` data frame from `nycflights13`.
 
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+* It has 15 variables, including `origin`(weather station), `year`, `month`, `day`, `hour`, `time_hour`(date and hour of the recording as a _POSIXct_ date) and indicators of weather.
+* It has `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns.
+* The mean temperature is `r mean(early_january_weather$temp)` °F.

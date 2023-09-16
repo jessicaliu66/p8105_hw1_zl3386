@@ -6,6 +6,7 @@ output: github_document
 ---
 
 ```{r, echo = FALSE, message = FALSE}
+library(tidyverse)
 library(moderndive)
 data("early_january_weather")
 #help(early_january_weather)
@@ -20,3 +21,29 @@ The `early_january_weather` dataset contains hourly meterological data for LGA, 
 * It has 15 variables, including `origin`(weather station), `year`, `month`, `day`, `hour`, `time_hour`(date and hour of the recording as a _POSIXct_ date) and indicators of weather.
 * It has `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns.
 * The mean temperature is `r mean(early_january_weather$temp)` °F.
+
+## Scatterplot
+
+Using the data from`early_january_weather`, we can make a scatterplot of `temp` vs `time_hour`, using `humid` to determine the color of each point.
+
+```{r df_create, echo = FALSE}
+plot_df = tibble(
+  x = early_january_weather$time_hour,
+  y1 = early_january_weather$temp,
+  humidity = early_january_weather$humid
+)
+```
+
+```{r yx_scatter, echo = FALSE}
+ggplot(plot_df, aes(x = x, y = y1, color = humidity)) + geom_point()
+
+```
+
+From the scatterplot, we can see that the temperature in the month of January 2013 has fluctuations but goes up in general over time, and the relative humidity is higher in late January.
+
+We will save this scatterplot as a png file (`scatterplot.png`) in the project directory.
+
+```{r save plot, echo = FALSE, message = FALSE}
+ggsave("scatterplot.png")
+```
+
